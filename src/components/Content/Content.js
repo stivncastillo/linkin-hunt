@@ -9,6 +9,10 @@ class Content extends Component {
             <ContentHeader />
 
             <LinksList />
+
+            <footer class="text-center">
+                <a href="#">show more</a>
+            </footer>
         </div>
     );
   }
