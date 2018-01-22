@@ -1,5 +1,89 @@
-body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600");
+
+* {
+  boder-radius: 0px;
 }
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  color: #333;
+}
+h4 {
+  color: #666;
+  font-size: 14px;
+  text-transform: uppercase;
+}
+.main-header {
+  padding: 3em 0 1em 0;
+}
+.menu a {
+  color: #333;
+}
+.menu a:hover {
+  color: #f60;
+  text-decoration: none;
+}
+.menu ol li {
+  padding-bottom: 0.5em;
+}
+.menu h4 {
+  margin-bottom: 1em;
+}
+.item {
+  display: flex;
+  margin-bottom: 2em;
+}
+.item a {
+  color: #333;
+}
+.item a:hover {
+  text-decoration: none;
+}
+.item-icons {
+  width: 74px;
+  flex-shrink: 0;
+}
+.item-icon {
+  display: block;
+}
+.item-description {
+  margin-bottom: 0.5em;
+}
+.item-content h2 {
+  font-size: 1.3em;
+  font-weight: 600;
+}
+.item-summary {
+  font-size: 12px;
+  color: #797979;
+  display: block;
+}
+.item-summary a {
+  color: #797979;
+}
+.item-summary a:hover {
+  color: #f60;
+}
+.item-summary .tag {
+  display: inline-block;
+  color: #797979;
+  border: 1px solid #d5d5d5;
+  padding: 0 3px;
+  text-transform: uppercase;
+  margin: 0 4px 5px 0;
+}
+.item-summary .tag:hover {
+  border-color: #f60;
+}
+.list header {
+  margin-bottom: 1em;
+  overflow: visible;
+}
+.logo {
+  width: 50px;
+  display: block;
+}
+.logo img {
+  width: 100%;
+}
+
