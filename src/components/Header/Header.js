@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Logo from '../Logo/Logo';
+import SearchInput from '../SearchInput/SearchInput';
 
 class Header extends Component {
   render() {
@@ -6,15 +8,11 @@ class Header extends Component {
         <header className="main-header">
             <div className="row">
                 <div className="col-sm-3">
-                    <a href="#" className="logo">
-                        <img src="http://via.placeholder.com/300x300" />
-                    </a>
+                    <Logo />
                 </div>
 
                 <div className="col-sm-6">
-                    <div className="form-group">
-                        <input type="text" className="form-control" aria-describedby="emailHelp" placeholder="Search..." />
-                    </div>
+                    <SearchInput />
                 </div>
             </div>
         </header>
