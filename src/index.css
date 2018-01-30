@@ -1,19 +1,17 @@
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600");
-
 * {
-    boder-radius: 0px;
+  boder-radius: 0px;
 }
 body {
-    font-family: 'Open Sans', sans-serif;
-    font-size: 16px;
-    color: #333;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  color: #333;
 }
 h4 {
-    color: #666;
-    font-size: 14px;
-    text-transform: uppercase;
+  color: #666;
+  font-size: 14px;
+  text-transform: uppercase;
 }
-
 .main-header {
   padding: 3em 0 1em 0;
 }
@@ -87,4 +85,42 @@ h4 {
 .logo img {
   width: 100%;
 }
-
+.form-signin {
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+}
+.form-signin .checkbox {
+  margin-bottom: 10px;
+}
+.form-signin .form-signin-heading {
+  text-align: center;
+  margin-bottom: 1em;
+}
+.form-signin .checkbox {
+  font-weight: 400;
+}
+.form-signin .form-control {
+  position: relative;
+  box-sizing: border-box;
+  height: auto;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input:first-of-type {
+  margin-bottom: -1px;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+.form-signin input {
+  border-radius: 0;
+  margin-bottom: -1px;
+}
+.form-signin input:last-of-type {
+  margin-bottom: 10px;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
