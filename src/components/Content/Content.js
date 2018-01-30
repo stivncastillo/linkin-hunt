@@ -10,7 +10,7 @@ class Content extends Component {
 
             <LinksList />
 
-            <footer class="text-center">
+            <footer className="text-center">
                 <a href="#">show more</a>
             </footer>
         </div>
