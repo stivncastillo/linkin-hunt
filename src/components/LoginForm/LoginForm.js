@@ -7,9 +7,9 @@ class LoginForm extends Component {
             <form className="form-signin">
                 <h2 className="form-signin-heading">Please sign in</h2>
 
-                <input type="email" id="inputEmail" className="form-control" placeholder="Email address" required autoFocus />
+                <input type="email" id="inputEmail" className="form-control" placeholder="Email address" autoFocus />
 
-                <input type="password" id="inputPassword" className="form-control" placeholder="Password" required />
+                <input type="password" id="inputPassword" className="form-control" placeholder="Password" />
                 <div className="checkbox">
                     <label>
                         <input type="checkbox" value="remember-me" /> Remember me

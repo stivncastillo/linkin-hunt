@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
+import RegisterForm from '../../components/RegisterForm/RegisterForm';
+import Header from '../../components/Header/Header';
 
 class Register extends Component {
     render() {
         return (
             <div>
-                <h2>Setenta Hp</h2>
+                <Header withSearchBar={false} />
+                <RegisterForm />
             </div>
         );
     }
