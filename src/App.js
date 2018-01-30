@@ -1,32 +1,23 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import './App.css';
-import Header from './components/Header/Header';
-import Content from './components/Content/Content';
-import AccessSide from './components/AccessSide/AccessSide';
-import CategoryList from './components/CategoryList/CategoryList';
+
+import Home from './pages/Home/Home';
+import Login from './pages/Login/Login';
+import Register from './pages/Register/Register';
 
 class App extends Component {
-  render() {
-    return (
-      <div>
-        <Header />
-
-        <div className="row">
-          <div className="col-sm-3">
-            <CategoryList />
-          </div>
-
-          <div className="col-sm-6">
-            <Content />
-          </div>
-
-          <div className="col-sm-3">
-            <AccessSide />
-          </div>
-        </div>
-      </div>
-    );
-  }
+    render() {
+        return (
+            <Router>
+                <div>
+                    <Route exact path="/" component={Home} />
+                    <Route path="/login" component={Login} />
+                    <Route path="/register" component={Register} />
+                </div>
+            </Router>
+        );
+    }
 }
 
 export default App;

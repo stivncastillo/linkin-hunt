@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class AccessSide extends Component {
   render() {
@@ -8,8 +9,8 @@ class AccessSide extends Component {
 
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo ipsum sequi nulla nam id in voluptatum eveniet sed sapiente, fugiat impedit obcaecati provident labore reprehenderit perferendis est laborum? Dolor, eius.</p>
 
-            <a href="#" className="btn btn-primary btn-block">Register</a>
-            <a href="#" className="btn btn-secondary btn-block">Login</a>
+            <Link to="/register" className="btn btn-primary btn-block">Register</Link>
+            <Link to="/login" className="btn btn-secondary btn-block">Login</Link>
         </div>
     );
   }

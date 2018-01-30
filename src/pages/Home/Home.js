@@ -8,23 +8,22 @@ import CategoryList from '../../components/CategoryList/CategoryList';
 class Home extends Component {
   render() {
     return (
-      <div>
-        <Header />
+        <div>
+            <Header />
+            <div className="row">
+                <div className="col-sm-3">
+                    <CategoryList />
+                </div>
 
-        <div className="row">
-          <div className="col-sm-3">
-            <CategoryList />
-          </div>
+                <div className="col-sm-6">
+                    <Content />
+                </div>
 
-          <div className="col-sm-6">
-            <Content />
-          </div>
-
-          <div className="col-sm-3">
-            <AccessSide />
-          </div>
+                <div className="col-sm-3">
+                    <AccessSide />
+                </div>
+            </div>
         </div>
-      </div>
     );
   }
 }
