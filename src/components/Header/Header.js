@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import Logo from '../Logo/Logo';
 import SearchInput from '../SearchInput/SearchInput';
 
@@ -12,7 +13,7 @@ class Header extends Component {
                 </div>
 
                 <div className="col-sm-6">
-                    <SearchInput />
+                    {this.props.withSearchBar ? <SearchInput /> : ''}
                 </div>
             </div>
         </header>

@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
+import LoginForm from '../../components/LoginForm/LoginForm';
+import Header from '../../components/Header/Header';
 
 class Login extends Component {
     render() {
         return (
             <div>
-                <h2>Putoooooo</h2>
+                <Header withSearchBar={false} />
+                <LoginForm />
             </div>
         );
     }
