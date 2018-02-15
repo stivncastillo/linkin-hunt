@@ -1,4 +1,9 @@
-const MainState = (state = [], action) => {
+const MainState = (state = [
+    {
+        title: "El puto amo",
+        description: "Hola linda como estas"
+    }
+], action) => {
     var newState = Object.assign({}, state);
 
     switch (action.type) {

@@ -9,13 +9,11 @@ import './index.css';
 
 import store from './data/store';
 
-const STORE = store();
-
 // import { createStore } from 'redux';
 // import { Provider } from 'react-redux';
 
 ReactDOM.render(
-    <Provider store={STORE}>
+    <Provider store={store}>
         <App />
     </Provider>
 , document.getElementById('root'));

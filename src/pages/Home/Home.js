@@ -5,6 +5,8 @@ import Content from '../../components/Content/Content';
 import AccessSide from '../../components/AccessSide/AccessSide';
 import CategoryList from '../../components/CategoryList/CategoryList';
 
+import { connect } from 'redux';
+
 class Home extends Component {
   render() {
     return (
@@ -28,4 +30,10 @@ class Home extends Component {
   }
 }
 
-export default Home;
+const mapStateToProps = (state) => {
+    return {
+        prop: state.MainState
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home)
