@@ -9,7 +9,7 @@ class Home extends Component {
   render() {
     return (
         <div>
-            <Header />
+            <Header withSearchBar={true} />
             <div className="row">
                 <div className="col-sm-3">
                     <CategoryList />
