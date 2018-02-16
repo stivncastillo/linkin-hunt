@@ -12,8 +12,10 @@ import store from './data/store';
 // import { createStore } from 'redux';
 // import { Provider } from 'react-redux';
 
+const STORE = store();
+
 ReactDOM.render(
-    <Provider store={store}>
+    <Provider store={STORE}>
         <App />
     </Provider>
 , document.getElementById('root'));
