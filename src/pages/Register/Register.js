@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 import RegisterForm from '../../components/RegisterForm/RegisterForm';
 import Header from '../../components/Header/Header';

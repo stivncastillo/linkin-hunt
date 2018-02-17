@@ -2,10 +2,7 @@ import React, { Component } from 'react';
 
 import * as routes from '../../constants/routes';
 import { auth } from '../../firebase';
-
-const byPropKey = (propertyName, value) => () => ({
-    [propertyName]: value,
-});
+import { helpers } from '../../utils';
 
 const INITIAL_STATE = {
     name: '',
@@ -39,7 +36,7 @@ class RegisterForm extends Component {
                 this.props.history.push(routes.HOME);
             })
             .catch(error => {
-                this.setState(byPropKey('error', error));
+                this.setState(helpers.byPropKey('error', error));
             });
 
         event.preventDefault();
@@ -67,28 +64,28 @@ class RegisterForm extends Component {
                         className="form-control"
                         placeholder="Name"
                         value={name}
-                        onChange={event => this.setState(byPropKey('name', event.target.value))}
+                        onChange={event => this.setState(helpers.byPropKey('name', event.target.value))}
                         autoFocus />
 
                     <input
                         type="email"
                         className="form-control"
                         value={email}
-                        onChange={event => this.setState(byPropKey('email', event.target.value))}
+                        onChange={event => this.setState(helpers.byPropKey('email', event.target.value))}
                         placeholder="Email" />
 
                     <input
                         type="password"
                         className="form-control"
                         value={password}
-                        onChange={event => this.setState(byPropKey('password', event.target.value))}
+                        onChange={event => this.setState(helpers.byPropKey('password', event.target.value))}
                         placeholder="Password" />
 
                     <input
                         type="password"
                         className="form-control"
                         value={passwordConfirm}
-                        onChange={event => this.setState(byPropKey('passwordConfirm', event.target.value))}
+                        onChange={event => this.setState(helpers.byPropKey('passwordConfirm', event.target.value))}
                         placeholder="Password Confirm" />
 
                     <div className="checkbox">
