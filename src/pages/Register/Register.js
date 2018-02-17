@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+
+import { Link, withRouter } from 'react-router-dom';
+
 import RegisterForm from '../../components/RegisterForm/RegisterForm';
 import Header from '../../components/Header/Header';
 
@@ -7,10 +10,10 @@ class Register extends Component {
         return (
             <div>
                 <Header withSearchBar={false} />
-                <RegisterForm />
+                <RegisterForm history={this.props.history} />
             </div>
         );
     }
 }
 
-export default Register;
+export default withRouter(Register);

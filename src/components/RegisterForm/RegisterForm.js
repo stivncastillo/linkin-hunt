@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import { Link, withRouter } from 'react-router-dom';
 
 import * as routes from '../../constants/routes';
-
 import { auth } from '../../firebase';
 
 const byPropKey = (propertyName, value) => () => ({
@@ -21,10 +19,14 @@ class RegisterForm extends Component {
     constructor(props) {
         super(props);
 
-        this.state = { ...INITIAL_STATE }
+        this.state = {
+            ...INITIAL_STATE
+        };
+
+        this.onSubmit = this.onSubmit.bind(this);
     }
 
-    onSubmit = (event) => {
+    onSubmit(event) {
         const {
             username,
             email,
@@ -33,8 +35,8 @@ class RegisterForm extends Component {
 
         auth.doCreateUserWithEmailAndPassword(email, password)
             .then(authUser => {
-                console.log('Registered');
                 this.setState(() => ({ ...INITIAL_STATE }));
+                this.props.history.push(routes.HOME);
             })
             .catch(error => {
                 this.setState(byPropKey('error', error));
