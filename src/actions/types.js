@@ -1,1 +1,5 @@
 export const LINKS_LOAD_DATA = "LINKS_LOAD_DATA";
+
+export const AUTH_USER = "AUTH_USER";
+export const AUTH_USER_SUCCESS = "AUTH_USER_SUCCESS";
+export const AUTH_USER_FAILURE = "AUTH_USER_FAILURE";

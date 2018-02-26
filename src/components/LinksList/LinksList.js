@@ -39,15 +39,15 @@ class LinksList extends Component {
 }
 
 const mapStateToProps = state => {
-  return {
-      posts: state.linksReducer
-  }
+    return {
+        posts: state.linksReducer
+    }
 };
 
 const mapDispatchToProps = dispatch =>{
-return {
-  getData: () => dispatch(getData())
-};
+    return {
+        getData: () => dispatch(getData())
+    };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(LinksList)

@@ -3,6 +3,10 @@ import React, { Component } from 'react';
 import * as routes from '../../constants/routes';
 import { auth } from '../../firebase';
 import { helpers } from '../../utils';
+import { getFetch } from '../../actions/authAction';
+
+import { connect } from 'react-redux';
+
 
 const INITIAL_STATE = {
     email: '',
@@ -27,17 +31,27 @@ class LoginForm extends Component {
             password,
         } = this.state;
 
-        auth.doSignInWithEmailAndPassword(email, password)
-            .then(() => {
-                this.setState(() => ({ ...INITIAL_STATE }));
-                this.props.history.push(routes.HOME);
-            })
-            .catch(error => {
-                this.setState(helpers.byPropKey('error', error));
-            });
+        this.props.getFetch(email, password);
 
         event.preventDefault();
+
+        // auth.doSignInWithEmailAndPassword(email, password)
+        //     .then((data) => {
+        //         console.log(data);
+        //         this.setState(() => ({ ...INITIAL_STATE }));
+        //         this.props.history.push(routes.HOME);
+        //     })
+        //     .catch(error => {
+        //         console.log(error);
+        //         this.setState(helpers.byPropKey('error', error));
+        //     });
     }
+
+    componentWillReceiveProps(nextProps){ this._renderFetch(nextProps); }
+
+	_renderFetch = (data) => {
+        console.log('DATA', data);
+	}
 
     render() {
         const { email, password, error } = this.state;
@@ -79,4 +93,17 @@ class LoginForm extends Component {
     }
 }
 
-export default LoginForm;
+
+const mapStateToProps = state => {
+    return {
+        authReducer: state.authReducer
+    }
+};
+
+const mapDispatchToProps = dispatch =>{
+    return {
+        getFetch: (email, password) => dispatch(getFetch(email, password))
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginForm)
