@@ -9,7 +9,8 @@ const objectUser = {
         isAnonymous: false,
         lastLoginAt: "",
         createdAt: ""
-    }
+    },
+    isLogged: false
 };
 
 const _newStore = (obj) => {

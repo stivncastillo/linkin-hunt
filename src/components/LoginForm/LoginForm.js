@@ -7,7 +7,6 @@ import { getFetch } from '../../actions/authAction';
 
 import { connect } from 'react-redux';
 
-
 const INITIAL_STATE = {
     email: '',
     password: '',
@@ -51,6 +50,11 @@ class LoginForm extends Component {
 
 	_renderFetch = (data) => {
         console.log('DATA', data);
+        if (data.authReducer.isLogged) {
+            this.props.history.push(routes.HOME);
+        }else{
+            this.setState(helpers.byPropKey('error', 'The credentials are not valid'));
+        }
 	}
 
     render() {
@@ -64,7 +68,7 @@ class LoginForm extends Component {
                 <form className="form-signin" onSubmit={this.onSubmit}>
                     <h2 className="form-signin-heading">Please sign in</h2>
 
-                    { error && <p className="text-danger">{error.message}</p> }
+                    { this.props.authReducer.error && <p className="text-danger">{this.props.authReducer.error}</p> }
 
                     <input
                         type="email"
@@ -81,11 +85,11 @@ class LoginForm extends Component {
                         className="form-control"
                         placeholder="Password" />
 
-                    <div className="checkbox">
+                    {/* <div className="checkbox">
                         <label>
                             <input type="checkbox" value="remember-me" /> Remember me
                         </label>
-                    </div>
+                    </div> */}
                     <button className="btn btn-lg btn-primary btn-block" type="submit" disabled={isInvalid}>Sign in</button>
                 </form>
             </div>
