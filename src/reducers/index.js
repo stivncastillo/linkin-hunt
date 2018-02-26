@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
 
-import { MainState } from './mainState';
+import { linksReducer } from './linksReducer';
 
 export const Reducers = combineReducers({
-	MainState
+	linksReducer
 });
 
 export default Reducers;

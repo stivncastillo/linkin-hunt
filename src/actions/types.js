@@ -1,0 +1,1 @@
+export const LINKS_LOAD_DATA = "LINKS_LOAD_DATA";

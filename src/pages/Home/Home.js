@@ -5,45 +5,51 @@ import Content from '../../components/Content/Content';
 import AccessSide from '../../components/AccessSide/AccessSide';
 import CategoryList from '../../components/CategoryList/CategoryList';
 
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 
 class Home extends Component {
-  render() {
-    return (
-        <div>
-            <Header withSearchBar={true} />
-            <div className="row">
-                <div className="col-sm-3">
-                    <CategoryList />
-                </div>
+    constructor(props){
+		super(props);
 
-                <div className="col-sm-6">
-                    <Content />
-                </div>
+		this.state = {
+            posts: []
+        };
+    }
 
-                <div className="col-sm-3">
-                    <AccessSide />
+    componentWillMount() { }
+
+    render() {
+        return (
+            <div>
+                <Header withSearchBar={true} />
+                <div className="row">
+                    <div className="col-sm-3">
+                        <CategoryList />
+                    </div>
+
+                    <div className="col-sm-6">
+                        <Content />
+                    </div>
+
+                    <div className="col-sm-3">
+                        <AccessSide />
+                    </div>
                 </div>
             </div>
-        </div>
-    );
-  }
-}
-
-const mapStateToProps = (state) => {
-    return {
-        posts: state.MainState
+        );
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-
+const mapStateToProps = state => {
     return {
-        dispatch1: () => {
-            // dispatch(actionCreator);
-        }
+        // posts: state.linksReducer
     }
+};
 
-}
+const mapDispatchToProps = dispatch =>{
+	return {
+		// getData: () => dispatch(getData())
+	};
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home)

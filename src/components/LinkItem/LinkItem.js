@@ -4,7 +4,7 @@ class LinksList extends Component {
   render() {
     return (
         <article className="item">
-            <a href="#" className="item-icons">
+            <a href={this.props.url} className="item-icons">
                 <span className="item-icon">
                     <i className="fa fa-eye"></i> {this.props.views}
                 </span>
@@ -16,13 +16,13 @@ class LinksList extends Component {
 
             <div className="item-content">
                 <h2>
-                    <a href="#">{this.props.name}</a>
+                    <a href={this.props.url}>{this.props.name}</a>
                 </h2>
                 <p className="item-description">{this.props.description}</p>
                 <summary className="item-summary">
                     <time>19 minutes ago by</time>
-                    <a href="#">stelabouras</a>
-                    <a className="tag" href="#">mobile</a>
+                    <a href={this.props.url}>stelabouras</a>
+                    <a className="tag" href={this.props.url}>mobile</a>
                 </summary>
             </div>
         </article>
