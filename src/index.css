@@ -124,3 +124,21 @@ h4 {
   border-bottom-left-radius: 3px;
   border-bottom-right-radius: 3px;
 }
+.profile {
+  text-align: center;
+}
+.profile-image {
+  width: 100px;
+  margin: auto;
+  margin-bottom: 1em;
+}
+.profile-image > img {
+  width: 100%;
+}
+.profile-info h4 {
+  margin-bottom: 0px;
+}
+.profile-info p {
+  color: #999999;
+  font-size: 12px;
+}

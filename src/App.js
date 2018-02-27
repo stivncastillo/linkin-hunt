@@ -33,10 +33,10 @@ class App extends Component {
                             <Register {...props} />
                         ) : (
                             <Redirect
-                            to={{
-                                pathname: "/login",
-                                state: { from: props.location }
-                            }}
+                                to={{
+                                    pathname: routes.SIGN_IN,
+                                    state: { from: props.location }
+                                }}
                             />
                         )
                         }
