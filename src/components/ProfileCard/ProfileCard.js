@@ -1,8 +1,32 @@
 import React, { Component } from 'react';
 
+import { getLogoutFetch } from '../../actions/authAction';
+import * as routes from '../../constants/routes';
+
 import { connect } from 'react-redux';
 
 class ProfileCard extends Component {
+
+    constructor(props) {
+        super(props);
+
+        this.onLogout = this.onLogout.bind(this);
+    }
+
+    onLogout(event){
+        this.props.getLogoutFetch();
+
+        event.preventDefault();
+    }
+
+    componentWillReceiveProps(nextProps){ this._renderFetch(nextProps); }
+
+	_renderFetch = (data) => {
+        if (! data.authReducer.isLogged) {
+            this.props.history.push(routes.HOME);
+        }
+	}
+
     render() {
         return (
             <div className="card profile">
@@ -18,7 +42,7 @@ class ProfileCard extends Component {
 
                     <div className="profile-actions d-flex justify-content-center">
                         <a href="" className="card-link">Profile</a>
-                        <a href="" className="card-link">Logout</a>
+                        <a href="" onClick={this.onLogout} className="card-link">Logout</a>
                     </div>
                 </div>
             </div>
@@ -34,7 +58,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch =>{
     return {
-        // getFetch: (email, password) => dispatch(getFetch(email, password))
+        getLogoutFetch: () => dispatch(getLogoutFetch())
     };
 };
 

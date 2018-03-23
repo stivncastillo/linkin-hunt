@@ -21,6 +21,7 @@ const authReducer = (state = initialUserInfo, action) => {
                 isLogged: false,
                 error: action.error.message
             };
+
         case types.REGISTER_USER:
             return newState;
         case types.REGISTER_USER_SUCCESS:
@@ -33,6 +34,20 @@ const authReducer = (state = initialUserInfo, action) => {
             return {
                 ...newState,
                 isLogged: false,
+                error: action.error.message
+            };
+
+        case types.LOGOUT_USER:
+            return newState;
+        case types.LOGOUT_USER_SUCCESS:
+            return {
+                ...newState,
+                user: null,
+                isLogged: false
+            };
+        case types.LOGOUT_USER_FAILURE    :
+            return {
+                ...newState,
                 error: action.error.message
             };
         default:
