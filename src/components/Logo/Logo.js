@@ -5,7 +5,7 @@ class Logo extends Component {
   render() {
     return (
         <Link to="/" className="logo">
-            <img src="http://via.placeholder.com/300x300" />
+            <img src="http://via.placeholder.com/300x300" alt="LinkinHunt" />
         </Link>
     );
   }

@@ -17,8 +17,8 @@ class ProfileCard extends Component {
                     </div>
 
                     <div className="profile-actions d-flex justify-content-center">
-                        <a href="#" class="card-link">Profile</a>
-                        <a href="#" class="card-link">Logout</a>
+                        <a href="" className="card-link">Profile</a>
+                        <a href="" className="card-link">Logout</a>
                     </div>
                 </div>
             </div>

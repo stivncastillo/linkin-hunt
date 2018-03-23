@@ -11,7 +11,7 @@ class Content extends Component {
             <LinksList />
 
             <footer className="text-center">
-                <a href="#">show more</a>
+                <a href="">show more</a>
             </footer>
         </div>
     );

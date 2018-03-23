@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 
 import * as routes from '../../constants/routes';
-import { auth } from '../../firebase';
 import { helpers } from '../../utils';
+import { getRegisterFetch } from '../../actions/authAction';
+
+import { connect } from 'react-redux';
 
 const INITIAL_STATE = {
     name: '',
@@ -17,7 +19,8 @@ class RegisterForm extends Component {
         super(props);
 
         this.state = {
-            ...INITIAL_STATE
+            ...INITIAL_STATE,
+            isLoading: false
         };
 
         this.onSubmit = this.onSubmit.bind(this);
@@ -25,26 +28,29 @@ class RegisterForm extends Component {
 
     onSubmit(event) {
         const {
-            username,
             email,
             password,
         } = this.state;
 
-        auth.doCreateUserWithEmailAndPassword(email, password)
-            .then(authUser => {
-                this.setState(() => ({ ...INITIAL_STATE }));
-                this.props.history.push(routes.HOME);
-            })
-            .catch(error => {
-                this.setState(helpers.byPropKey('error', error));
-            });
+        this.props.getRegisterFetch(email, password);
 
         event.preventDefault();
     }
 
+    componentWillReceiveProps(nextProps){ this._renderFetch(nextProps); }
+
+    _renderFetch = (data) => {
+        if (data.authReducer.isLogged) {
+            this.setState({ isLoading: false });
+            this.props.history.push(routes.HOME);
+        }else{
+            this.setState(helpers.byPropKey('error', 'The credentials are not valid'));
+        }
+	}
+
     render() {
 
-        const { name, email, password, passwordConfirm, error } = this.state;
+        const { name, email, password, passwordConfirm } = this.state;
 
         const isInvalid =
             password !== passwordConfirm ||
@@ -57,7 +63,7 @@ class RegisterForm extends Component {
                 <form className="form-signin" onSubmit={this.onSubmit}>
                     <h2 className="form-signin-heading">Register</h2>
 
-                    { error && <p className="text-danger">{error.message}</p> }
+                    { this.props.authReducer.error && <p className="text-danger">{this.props.authReducer.error}</p> }
 
                     <input
                         type="text"
@@ -72,7 +78,7 @@ class RegisterForm extends Component {
                         className="form-control"
                         value={email}
                         onChange={event => this.setState(helpers.byPropKey('email', event.target.value))}
-                        placeholder="Email" />
+                        placeholder="Email"/>
 
                     <input
                         type="password"
@@ -94,14 +100,28 @@ class RegisterForm extends Component {
                         </label>
                     </div>
 
-                    <button
-                        className="btn btn-lg btn-primary btn-block"
-                        disabled={isInvalid}
-                        type="submit">Sign up</button>
+
+                    {this.state.isLoading ?
+                        <button className="btn btn-lg btn-primary btn-block" type="button" disabled={true}><i class="fa fa-spinner fa-pulse"></i></button>
+                    :
+                        <button className="btn btn-lg btn-primary btn-block" disabled={isInvalid} type="submit">Sign up</button>
+                    }
                 </form>
             </div>
         );
     }
 }
 
-export default RegisterForm;
+const mapStateToProps = state => {
+    return {
+        authReducer: state.authReducer
+    }
+};
+
+const mapDispatchToProps = dispatch =>{
+    return {
+        getRegisterFetch: (email, password) => dispatch(getRegisterFetch(email, password))
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(RegisterForm)

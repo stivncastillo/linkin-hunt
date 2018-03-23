@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import {
     BrowserRouter as Router,
     Route,
-    Link,
-    Redirect,
-    withRouter
+    Redirect
 } from 'react-router-dom';
 import './App.css';
 
@@ -19,7 +17,6 @@ import { connect } from 'react-redux';
 class App extends Component {
 
     render() {
-        console.log(this.props.authReducer.isLogged);
         return (
             <Router>
                 <div>
@@ -29,7 +26,7 @@ class App extends Component {
                     <Route
                         path={routes.SIGN_UP}
                         render={props =>
-                            this.props.authReducer.isLogged ? (
+                            !this.props.authReducer.isLogged ? (
                             <Register {...props} />
                         ) : (
                             <Redirect

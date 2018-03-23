@@ -25,7 +25,6 @@ export const getDataFailure = (error) => {
 export var getFetch = (email, password) => {
 
 	return(dispatch) => {
-		// execute actions
 		dispatch(getData());
 
         auth.doSignInWithEmailAndPassword(email, password)
@@ -35,5 +34,41 @@ export var getFetch = (email, password) => {
             .catch(error => {
                 dispatch(getDataFailure(error));
             });
+	};
+};
+
+export const getRegister = () => {
+	return{
+		type : types.REGISTER_USER
+	};
+};
+
+export const getRegisterSuccess = (response) => {
+	return{
+		type : types.REGISTER_USER_SUCCESS,
+		response
+	};
+};
+
+export const getRegisterFailure = (error) => {
+	return{
+		type : types.REGISTER_USER_FAILURE,
+		error
+	};
+};
+
+// Firebase auth
+export var getRegisterFetch = (email, password) => {
+
+	return(dispatch) => {
+		dispatch(getRegister());
+
+		auth.doCreateUserWithEmailAndPassword(email, password)
+			.then(data => {
+				dispatch(getRegisterSuccess(data));
+			})
+			.catch(error => {
+                dispatch(getRegisterFailure(error));
+			});
 	};
 };

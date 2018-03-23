@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 import * as routes from '../../constants/routes';
-import { auth } from '../../firebase';
 import { helpers } from '../../utils';
 import { getFetch } from '../../actions/authAction';
 
@@ -49,7 +48,7 @@ class LoginForm extends Component {
 	}
 
     render() {
-        const { email, password, error } = this.state;
+        const { email, password } = this.state;
         const isInvalid =
             password === '' ||
             email === '';
@@ -91,7 +90,6 @@ class LoginForm extends Component {
         );
     }
 }
-
 
 const mapStateToProps = state => {
     return {
