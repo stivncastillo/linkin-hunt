@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import { connect } from 'react-redux';
+
 class ProfileCard extends Component {
     render() {
         return (
@@ -10,8 +12,8 @@ class ProfileCard extends Component {
                     </div>
 
                     <div className="profile-info col-md-12">
-                        <h4>Stiven Castillo</h4>
-                        <p>stiven@stiven.com</p>
+                        <h4>{ this.props.authReducer.user.displayName }</h4>
+                        <p>{ this.props.authReducer.user.email }</p>
                     </div>
 
                     <div className="profile-actions d-flex justify-content-center">
@@ -24,4 +26,17 @@ class ProfileCard extends Component {
     }
 }
 
-export default ProfileCard;
+const mapStateToProps = state => {
+    return {
+        authReducer: state.authReducer
+    }
+};
+
+const mapDispatchToProps = dispatch =>{
+    return {
+        // getFetch: (email, password) => dispatch(getFetch(email, password))
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileCard);
+

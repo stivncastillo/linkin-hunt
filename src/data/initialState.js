@@ -1,15 +1,5 @@
 const objectUser = {
-    user: {
-        uid: "",
-        displayName: "",
-        photoURL: "",
-        email: "",
-        emailVerified: false,
-        phoneNumber: "",
-        isAnonymous: false,
-        lastLoginAt: "",
-        createdAt: ""
-    },
+    user: null,
     isLogged: false
 };
 

@@ -18,7 +18,8 @@ class LoginForm extends Component {
         super(props);
 
         this.state = {
-            ...INITIAL_STATE
+            ...INITIAL_STATE,
+            isLoading: false
         };
 
         this.onSubmit = this.onSubmit.bind(this);
@@ -30,27 +31,17 @@ class LoginForm extends Component {
             password,
         } = this.state;
 
+        this.setState({ isLoading: true });
         this.props.getFetch(email, password);
 
         event.preventDefault();
-
-        // auth.doSignInWithEmailAndPassword(email, password)
-        //     .then((data) => {
-        //         console.log(data);
-        //         this.setState(() => ({ ...INITIAL_STATE }));
-        //         this.props.history.push(routes.HOME);
-        //     })
-        //     .catch(error => {
-        //         console.log(error);
-        //         this.setState(helpers.byPropKey('error', error));
-        //     });
     }
 
     componentWillReceiveProps(nextProps){ this._renderFetch(nextProps); }
 
 	_renderFetch = (data) => {
-        console.log('DATA', data);
         if (data.authReducer.isLogged) {
+            this.setState({ isLoading: false });
             this.props.history.push(routes.HOME);
         }else{
             this.setState(helpers.byPropKey('error', 'The credentials are not valid'));
@@ -90,7 +81,11 @@ class LoginForm extends Component {
                             <input type="checkbox" value="remember-me" /> Remember me
                         </label>
                     </div> */}
-                    <button className="btn btn-lg btn-primary btn-block" type="submit" disabled={isInvalid}>Sign in</button>
+                    {this.state.isLoading ?
+                        <button className="btn btn-lg btn-primary btn-block" type="button" disabled={true}><i class="fa fa-spinner fa-pulse"></i></button>
+                    :
+                        <button className="btn btn-lg btn-primary btn-block" type="submit" disabled={isInvalid}>Sign in</button>
+                    }
                 </form>
             </div>
         );
