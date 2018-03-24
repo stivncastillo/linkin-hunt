@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 
+import TagsInput from 'react-tagsinput';
+import 'react-tagsinput/react-tagsinput.css' // If using WebPack and style-loader.
+
 import * as routes from '../../constants/routes';
 import { helpers } from '../../utils';
 import { getFetch } from '../../actions/authAction';
@@ -19,10 +22,15 @@ class LinkForm extends Component {
 
         this.state = {
             ...INITIAL_STATE,
-            isLoading: false
+            isLoading: false,
+            tags: []
         };
 
         this.onSubmit = this.onSubmit.bind(this);
+    }
+
+    handleChange = (tags) => {
+        this.setState({tags})
     }
 
     onSubmit(event) {
@@ -77,7 +85,7 @@ class LinkForm extends Component {
 
                     <div className="form-group">
                         <label>Tags</label>
-                        <input type="text" className="form-control" placeholder="angular, java, photoshop..."/>
+                        <TagsInput value={this.state.tags} onChange={this.handleChange} maxTags={5} addKeys={[188,186]}/>
                     </div>
 
                     <button type="submit" className="btn btn-primary">Submit</button>

@@ -29,14 +29,12 @@ export var getCategoriesFetch = () => {
 
         let categoriesRef = firebase.database.ref('categories');
 
-        categoriesRef.on('value', function(snapshot) {
-            dispatch(getCategoriesSuccess(Object.values(snapshot.val())));
-        });
-			// .then(() => {
-			// 	dispatch(getCategoriesSuccess());
-			// })
-			// .catch(error => {
-            //     dispatch(getCategoriesFailure(error));
-			// });
+		categoriesRef.on('value',
+			snapshot => {
+				dispatch(getCategoriesSuccess(Object.values(snapshot.val())));
+			},
+			error => {
+				dispatch(getCategoriesFailure(error));
+			});
 	};
 };
