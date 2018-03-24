@@ -81,7 +81,7 @@ class LoginForm extends Component {
                         </label>
                     </div> */}
                     {this.state.isLoading ?
-                        <button className="btn btn-lg btn-primary btn-block" type="button" disabled={true}><i class="fa fa-spinner fa-pulse"></i></button>
+                        <button className="btn btn-lg btn-primary btn-block" type="button" disabled={true}><i className="fa fa-spinner fa-pulse"></i></button>
                     :
                         <button className="btn btn-lg btn-primary btn-block" type="submit" disabled={isInvalid}>Sign in</button>
                     }

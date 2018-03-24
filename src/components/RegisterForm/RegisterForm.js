@@ -28,11 +28,12 @@ class RegisterForm extends Component {
 
     onSubmit(event) {
         const {
+            name,
             email,
             password,
         } = this.state;
 
-        this.props.getRegisterFetch(email, password);
+        this.props.getRegisterFetch(name, email, password);
 
         event.preventDefault();
     }
@@ -120,7 +121,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch =>{
     return {
-        getRegisterFetch: (email, password) => dispatch(getRegisterFetch(email, password))
+        getRegisterFetch: (name, email, password) => dispatch(getRegisterFetch(name, email, password))
     };
 };
 

@@ -58,14 +58,20 @@ export const getRegisterFailure = (error) => {
 	};
 };
 
-export var getRegisterFetch = (email, password) => {
+export var getRegisterFetch = (name, email, password) => {
 
 	return(dispatch) => {
 		dispatch(getRegister());
 
 		auth.doCreateUserWithEmailAndPassword(email, password)
 			.then(data => {
-				dispatch(getRegisterSuccess(data));
+				auth.doProfileUpdate({displayName: name, photoURL: null})
+					.then(data => {
+						dispatch(getRegisterSuccess(data));
+					})
+					.catch(error => {
+                		dispatch(getRegisterFailure(error));
+					});
 			})
 			.catch(error => {
                 dispatch(getRegisterFailure(error));
