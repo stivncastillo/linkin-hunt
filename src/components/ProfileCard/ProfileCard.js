@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 import { getLogoutFetch } from '../../actions/authAction';
 import * as routes from '../../constants/routes';
@@ -44,6 +45,8 @@ class ProfileCard extends Component {
                         <a href="" className="card-link">Profile</a>
                         <a href="" onClick={this.onLogout} className="card-link">Logout</a>
                     </div>
+
+                    <Link to="/create-link" className="btn btn-primary btn-block"><i className="fa fa-plus"></i> New Link</Link>
                 </div>
             </div>
         );

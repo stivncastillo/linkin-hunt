@@ -11,6 +11,7 @@ import * as routes from './constants/routes';
 import Home from './pages/Home/Home';
 import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
+import CreateLink from './pages/CreateLink/CreateLink';
 
 import { connect } from 'react-redux';
 
@@ -26,15 +27,21 @@ class App extends Component {
                     <Route
                         path={routes.SIGN_UP}
                         render={props =>
-                            !this.props.authReducer.isLogged ? (
+                            this.props.authReducer.isLogged ? (
                             <Register {...props} />
                         ) : (
-                            <Redirect
-                                to={{
-                                    pathname: routes.SIGN_IN,
-                                    state: { from: props.location }
-                                }}
-                            />
+                            <Redirect to={{ pathname: routes.SIGN_IN, state: { from: props.location } }} />
+                        )
+                        }
+                    />
+
+                    <Route
+                        path={routes.CREATE_LINK}
+                        render={props =>
+                            this.props.authReducer.isLogged ? (
+                            <CreateLink {...props} />
+                        ) : (
+                            <Redirect to={{ pathname: routes.SIGN_IN, state: { from: props.location } }} />
                         )
                         }
                     />

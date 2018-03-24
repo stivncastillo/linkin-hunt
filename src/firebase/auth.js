@@ -20,5 +20,6 @@ export const doPasswordReset = (email) =>
 export const doPasswordUpdate = (password) =>
     auth.currentUser.updatePassword(password);
 
+// Update profile
 export const doProfileUpdate = (profile) =>
     auth.currentUser.updateProfile(profile);

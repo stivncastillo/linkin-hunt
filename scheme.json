@@ -1,0 +1,39 @@
+{
+    "categories": {
+        "category1": {
+            "_id": "libraries",
+            "name": "Libraries",
+            "image": "http://via.placeholder.com/100x100"
+        },
+        "category2": {
+            "_id": "templates",
+            "name": "Templates",
+            "image": "http://via.placeholder.com/100x100"
+        },
+        "category3": {
+            "_id": "tutorials",
+            "name": "Tutorials",
+            "image": "http://via.placeholder.com/100x100"
+        },
+        "category4": {
+            "_id": "courses",
+            "name": "Courses",
+            "image": "http://via.placeholder.com/100x100"
+        },
+        "category5": {
+            "_id": "backend",
+            "name": "Backend",
+            "image": "http://via.placeholder.com/100x100"
+        },
+        "category6": {
+            "_id": "frontend",
+            "name": "Frontend",
+            "image": "http://via.placeholder.com/100x100"
+        },
+        "category7": {
+            "_id": "fonts",
+            "name": "Fonts",
+            "image": "http://via.placeholder.com/100x100"
+        }
+    }
+}
