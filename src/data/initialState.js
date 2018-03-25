@@ -7,6 +7,20 @@ const objectCategories ={
     categories: []
 };
 
+const objectLink = {
+    title: null,
+    description: null,
+    tags: [],
+    category: null
+};
+
+const objectLinkMetadata = {
+    result: {
+        status: null
+    },
+    meta: null
+};
+
 const _newStore = (obj) => {
 	return JSON.parse(JSON.stringify(obj));
 };
@@ -14,6 +28,8 @@ const _newStore = (obj) => {
 export {
     objectUser,
     objectCategories,
+    objectLink,
+    objectLinkMetadata,
 
     _newStore
 }

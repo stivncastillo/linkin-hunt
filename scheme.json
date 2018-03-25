@@ -35,5 +35,17 @@
             "name": "Fonts",
             "image": "http://via.placeholder.com/100x100"
         }
+    },
+    "links": {
+        "link1": {
+            "title": "Gifski, Convert videos to Gifs",
+            "description": "Convertir los video a gifs",
+            "url": "https://sindresorhus.com/gifski",
+            "category": "category1",
+            "tags": [
+                "gif",
+                "video"
+            ]
+        }
     }
 }

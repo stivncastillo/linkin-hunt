@@ -5,25 +5,21 @@ import 'react-tagsinput/react-tagsinput.css' // If using WebPack and style-loade
 
 import * as routes from '../../constants/routes';
 import { helpers } from '../../utils';
-import { getFetch } from '../../actions/authAction';
+import { postFetch, getMetaDataFetch } from '../../actions/linksAction';
 import CategoriesSelect from './CategoriesSelect';
 
 import { connect } from 'react-redux';
-
-const INITIAL_STATE = {
-    email: '',
-    password: '',
-    error: null,
-};
 
 class LinkForm extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            ...INITIAL_STATE,
-            isLoading: false,
-            tags: []
+            title: null,
+            description: null,
+            tags: [],
+            category: null,
+            url: 'http://stivencastillo.com/'
         };
 
         this.onSubmit = this.onSubmit.bind(this);
@@ -34,13 +30,13 @@ class LinkForm extends Component {
     }
 
     onSubmit(event) {
-        const {
-            email,
-            password,
-        } = this.state;
+        // const {
+        //     email,
+        //     password,
+        // } = this.state;
 
-        this.setState({ isLoading: true });
-        this.props.getFetch(email, password);
+        // this.setState({ isLoading: true });
+        this.props.postFetch();
 
         event.preventDefault();
     }
@@ -48,13 +44,17 @@ class LinkForm extends Component {
     componentWillReceiveProps(nextProps){ this._renderFetch(nextProps); }
 
 	_renderFetch = (data) => {
-        if (data.authReducer.isLogged) {
-            this.setState({ isLoading: false });
-            this.props.history.push(routes.HOME);
-        }else{
-            this.setState(helpers.byPropKey('error', 'The credentials are not valid'));
-        }
-	}
+        // if (data.authReducer.isLogged) {
+        //     this.setState({ isLoading: false });
+        //     this.props.history.push(routes.HOME);
+        // }else{
+        //     this.setState(helpers.byPropKey('error', 'The credentials are not valid'));
+        // }
+    }
+
+    _getMetadata = () => {
+        this.props.getMetaDataFetch({url: this.state.url}, `?url=${this.state.url}`, 'GET');
+    }
 
     render() {
         // const { email, password } = this.state;
@@ -73,6 +73,17 @@ class LinkForm extends Component {
                     </div>
 
                     <div className="form-group">
+                        <label>Url</label>
+                        <input
+                            type="text"
+                            className="form-control"
+                            placeholder="http://example.com/"
+                            onChange={event => this.setState(helpers.byPropKey('url', event.target.value))}
+                            onBlur={this._getMetadata}
+                            value={this.state.url}/>
+                    </div>
+
+                    <div className="form-group">
                         <label>Title</label>
                         <input type="text" className="form-control" placeholder="Title of link"/>
                     </div>
@@ -88,7 +99,7 @@ class LinkForm extends Component {
                         <TagsInput value={this.state.tags} onChange={this.handleChange} maxTags={5} addKeys={[188,186]}/>
                     </div>
 
-                    <button type="submit" className="btn btn-primary">Submit</button>
+                    <button type="submit" className="btn btn-primary">Create</button>
                 </form>
             </div>
         );
@@ -97,13 +108,15 @@ class LinkForm extends Component {
 
 const mapStateToProps = state => {
     return {
-        authReducer: state.authReducer
+        newLink: state.newLinkReducer,
+        metadata: state.metadataReducer
     }
 };
 
 const mapDispatchToProps = dispatch =>{
     return {
-        getFetch: (email, password) => dispatch(getFetch(email, password))
+        postFetch: () => dispatch(postFetch()),
+        getMetaDataFetch: (body, urlApi, method) => dispatch(getMetaDataFetch(body, urlApi, method))
     };
 };
 

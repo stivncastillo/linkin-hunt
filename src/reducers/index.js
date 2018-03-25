@@ -1,13 +1,14 @@
 import { combineReducers } from 'redux';
 
-import { linksReducer } from './linksReducer';
 import { authReducer } from './authReducer';
+import { linksReducer, metadataReducer } from './linksReducer';
 import { categoriesReducer } from './categoriesReducer';
 
 export const Reducers = combineReducers({
 	linksReducer,
+	metadataReducer,
 	authReducer,
-	categoriesReducer
+	categoriesReducer,
 });
 
 export default Reducers;
