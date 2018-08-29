@@ -64,8 +64,18 @@ export const postDataFailure = (error) => {
 	};
 };
 
-export var postFetch = () => {
+export var postFetch = (link) => {
 	return(dispatch) => {
 		dispatch(postData());
+
+		let linkRef = firebase.database.ref('links');
+
+		linkRef.push(link)
+			.then(response => {
+				dispatch(postDataSuccess(response));
+			})
+			.catch(error => {
+				dispatch(postDataFailure(error));
+			});
 	};
 };

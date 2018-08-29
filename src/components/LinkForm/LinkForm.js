@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import TagsInput from 'react-tagsinput';
 import 'react-tagsinput/react-tagsinput.css' // If using WebPack and style-loader.
 
-import * as routes from '../../constants/routes';
 import { helpers } from '../../utils';
 import { postFetch, getMetaDataFetch } from '../../actions/linksAction';
 import CategoriesSelect from './CategoriesSelect';
@@ -19,7 +18,7 @@ class LinkForm extends Component {
             description: null,
             tags: [],
             category: null,
-            url: 'http://stivencastillo.com/'
+            url: null
         };
 
         this.onSubmit = this.onSubmit.bind(this);
@@ -36,7 +35,13 @@ class LinkForm extends Component {
         // } = this.state;
 
         // this.setState({ isLoading: true });
-        this.props.postFetch();
+        this.props.postFetch({
+            title: this.state.title,
+            description: this.state.description,
+            tags: this.state.tags,
+            category: this.state.category,
+            url: this.state.url
+        });
 
         event.preventDefault();
     }
@@ -44,16 +49,11 @@ class LinkForm extends Component {
     componentWillReceiveProps(nextProps){ this._renderFetch(nextProps); }
 
 	_renderFetch = (data) => {
-        // if (data.authReducer.isLogged) {
-        //     this.setState({ isLoading: false });
-        //     this.props.history.push(routes.HOME);
-        // }else{
-        //     this.setState(helpers.byPropKey('error', 'The credentials are not valid'));
-        // }
+
     }
 
     _getMetadata = () => {
-        this.props.getMetaDataFetch({url: this.state.url}, `?url=${this.state.url}`, 'GET');
+        // this.props.getMetaDataFetch({url: this.state.url}, `?url=${this.state.url}`, 'GET');
     }
 
     render() {
@@ -74,23 +74,40 @@ class LinkForm extends Component {
 
                     <div className="form-group">
                         <label>Url</label>
-                        <input
-                            type="text"
-                            className="form-control"
-                            placeholder="http://example.com/"
-                            onChange={event => this.setState(helpers.byPropKey('url', event.target.value))}
-                            onBlur={this._getMetadata}
-                            value={this.state.url}/>
+                        <div className="input-group mb-3">
+                            <input
+                                type="text"
+                                className="form-control"
+                                placeholder="http://example.com/"
+                                onChange={event => this.setState(helpers.byPropKey('url', event.target.value))}
+                                // value={this.state.url}
+                                />
+
+                            <div className="input-group-append">
+                                <button className="btn btn-success" type="button" onClick={this._getMetadata}>Set Metadata</button>
+                            </div>
+                        </div>
                     </div>
+
 
                     <div className="form-group">
                         <label>Title</label>
-                        <input type="text" className="form-control" placeholder="Title of link"/>
+                        <input
+                            type="text"
+                            className="form-control"
+                            placeholder="Title of link"
+                            onChange={event => this.setState(helpers.byPropKey('title', event.target.value))}
+                            />
                     </div>
 
                     <div className="form-group">
                         <label>Description</label>
-                        <textarea name="description" className="form-control" rows="3"></textarea>
+                        <textarea
+                            name="description"
+                            className="form-control"
+                            rows="3"
+                            onChange={event => this.setState(helpers.byPropKey('description', event.target.value))}
+                            ></textarea>
                         <small className="form-text text-muted">A short description of Link or Resource.</small>
                     </div>
 
@@ -115,7 +132,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch =>{
     return {
-        postFetch: () => dispatch(postFetch()),
+        postFetch: (link) => dispatch(postFetch(link)),
         getMetaDataFetch: (body, urlApi, method) => dispatch(getMetaDataFetch(body, urlApi, method))
     };
 };
