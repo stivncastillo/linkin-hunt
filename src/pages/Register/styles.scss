@@ -1,0 +1,21 @@
+.hero .nav,
+.hero.is-success .nav {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.box {
+    margin-top: 4rem;
+}
+
+.avatar {
+    margin-top: -70px;
+    padding-bottom: 20px;
+}
+
+.avatar img {
+    padding: 5px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 2px 3px rgba(10, 10, 10, .1), 0 0 0 1px rgba(10, 10, 10, .1);
+}
