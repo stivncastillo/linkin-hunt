@@ -60,6 +60,9 @@ class Home extends Component {
               </div>
 
               <div className="column is-6">
+                <div class="notification">
+                  It was found <strong>114</strong> bookmarks
+                </div>
                 <div class="card" style={{ marginBottom: '1em' }}>
                   <div class="card-content">
                     <p class="title">What are the Hooks in React?</p>
@@ -109,26 +112,51 @@ class Home extends Component {
               </div>
 
               <div className="column is-3">
-                <div class="card">
-                  <div class="card-content has-text-centered">
-                    <figure class="image is-128x128" style={{ margin: '0 auto 1em auto' }}>
-                      <img class="is-rounded" src="https://bulma.io/images/placeholders/128x128.png" />
-                    </figure>
-                    <div class="content">
-                      <h5 className="title">Stiven Castillo</h5>
-                      <p className="subtitle">@bacabange</p>
-                      Developer
+                <div className="columns">
+                  <div className="column">
+                    <div class="card">
+                      <div class="card-content has-text-centered">
+                        <figure class="image is-128x128" style={{ margin: '0 auto 1em auto' }}>
+                          <img class="is-rounded" src="https://bulma.io/images/placeholders/128x128.png" />
+                        </figure>
+                        <div class="content">
+                          <h5 className="title">Stiven Castillo</h5>
+                          <p className="subtitle">@bacabange</p>
+                          Developer
+                        </div>
+                      </div>
+
+                      <footer class="card-footer">
+                        <a href="#" class="card-footer-item">
+                          Profile
+                        </a>
+                        <a href="#" class="card-footer-item">
+                          Logout
+                        </a>
+                      </footer>
                     </div>
                   </div>
+                </div>
+                <div className="columns">
+                  <div className="column">
+                    <div class="card">
+                      <div class="card-content has-text-centered">
+                        <div class="content">
+                          <h5 className="title">Hi, Join us!</h5>
+                          We are a community of Developers, Designers or Anyone interesed to tech.
+                        </div>
+                      </div>
 
-                  <footer class="card-footer">
-                    <a href="#" class="card-footer-item">
-                      Profile
-                    </a>
-                    <a href="#" class="card-footer-item">
-                      Logout
-                    </a>
-                  </footer>
+                      <footer class="card-footer">
+                        <a href="#" class="card-footer-item">
+                          Sign <in />
+                        </a>
+                        <a href="#" class="card-footer-item">
+                          Register
+                        </a>
+                      </footer>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
