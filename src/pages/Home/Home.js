@@ -42,14 +42,19 @@ class Home extends Component {
               <div className="column is-3">
                 <aside className="menu">
                   <p className="menu-label">CATEGORIES</p>
+
                   <CategoriesData render={({ categories }) => <CategoriesList categories={categories} />} />
                 </aside>
               </div>
 
               <div className="column is-6">
-                <div className="notification">
-                  It was found <strong>114</strong> bookmarks
-                </div>
+                <LinkData
+                  render={({ links }) => (
+                    <div className="notification">
+                      It was found <strong>{links.length}</strong> bookmarks
+                    </div>
+                  )}
+                />
 
                 <LinkData render={({ links }) => <LinkList links={links} />} />
 

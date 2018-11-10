@@ -5,7 +5,7 @@ const LinkList = ({ links }) => {
   return (
     <React.Fragment>
       {links.map(link => (
-        <LinkItem {...link} />
+        <LinkItem key={link.id} {...link} />
       ))}
     </React.Fragment>
   );

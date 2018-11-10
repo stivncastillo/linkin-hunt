@@ -20,7 +20,7 @@
             ]
         },
         {
-            "id": 1,
+            "id": 2,
             "title": "Using Sass in Create React App v2",
             "description": "Adding Sass to a React app is simple thanks to Create React App v2. Add Sass in a minute!",
             "link": "https://scotch.io/tutorials/using-sass-in-create-react-app-v2",
