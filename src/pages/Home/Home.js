@@ -17,13 +17,18 @@ class Home extends Component {
 
     this.state = {
       isLogged: false,
+      isModalShow: false,
     };
   }
+
+  toggleModal = () => {
+    this.setState({ isModalShow: !this.state.isModalShow });
+  };
 
   render() {
     return (
       <div>
-        <ModalForm />
+        <ModalForm active={this.state.isModalShow} onClose={this.toggleModal} />
         <section className="section">
           <div className="container is-fluid">
             <div className="columns is-vcentered">
@@ -33,9 +38,7 @@ class Home extends Component {
               <div className="column is-6">
                 <SearchInput />
               </div>
-              <div className="column is-3">
-                <AddButton />
-              </div>
+              <div className="column is-3">{this.state.isLogged && <AddButton onClick={this.toggleModal} />}</div>
             </div>
 
             <div className="columns">
@@ -112,9 +115,9 @@ class Home extends Component {
                           <Link to="/login" className="card-footer-item">
                             Sign in
                           </Link>
-                          <a href="#" className="card-footer-item">
-                            Register
-                          </a>
+                          <Link to="/register" className="card-footer-item has-text-white has-background-primary">
+                            Sign Up
+                          </Link>
                         </footer>
                       </div>
                     </div>

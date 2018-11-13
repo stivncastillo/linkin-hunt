@@ -1,12 +1,12 @@
 import React from 'react';
 
-const AddButton = () => {
+const AddButton = props => {
   return (
     <div className="field is-grouped is-pulled-right">
       <p className="control">
-        <a className="button is-medium is-primary">
+        <button className="button is-medium is-primary" {...props}>
           <i className="fa fa-plus" />
-        </a>
+        </button>
       </p>
     </div>
   );

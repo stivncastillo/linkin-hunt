@@ -21,10 +21,10 @@ export default class LinkItem extends Component {
         </div>
         <footer className="card-footer">
           <a href="#" className="card-footer-item">
-            Save
+            <i className="fa fa-heart" />
           </a>
           <a href={this.props.link} className="card-footer-item" target="_blank">
-            Visit
+            <i className="fa fa-external-link-alt" />
           </a>
         </footer>
       </div>
