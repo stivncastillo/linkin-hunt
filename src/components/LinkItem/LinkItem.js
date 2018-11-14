@@ -9,11 +9,11 @@ export default class LinkItem extends Component {
           <p>{this.props.description}</p>
           <br />
           <div className="tags">
-            <span className="tag is-primary">{this.props.category.name}</span>
+            <span className="tag is-primary">{this.props.category}</span>
             {this.props.tags.map((tag, index) => {
               return (
                 <span key={index} className="tag is-light">
-                  {tag.name}
+                  {tag}
                 </span>
               );
             })}

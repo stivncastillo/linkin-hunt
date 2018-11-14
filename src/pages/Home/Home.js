@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import './styles.scss';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { firebaseConnect } from 'react-redux-firebase';
 // Own components
-import Logo from '../../components/Logo/Logo';
-import SearchInput from '../../components/SearchInput/SearchInput';
-import AddButton from '../../components/AddButton/AddButton';
+import Header from '../../components/Layout/Header';
 import ModalForm from '../../components/ModalForm/ModalForm';
 import CategoriesList from '../../components/CategoriesList/CategoriesList';
 import LinkList from '../../components/LinkList/LinkList';
 import LinkData from '../../components/LinkData/LinkData';
 import CategoriesData from '../../components/CategoriesData/CategoriesData';
+import Footer from '../../components/Layout/Footer';
 
 class Home extends Component {
   constructor(props) {
@@ -31,15 +33,7 @@ class Home extends Component {
         <ModalForm active={this.state.isModalShow} onClose={this.toggleModal} />
         <section className="section">
           <div className="container is-fluid">
-            <div className="columns is-vcentered">
-              <div className="column is-3">
-                <Logo />
-              </div>
-              <div className="column is-6">
-                <SearchInput />
-              </div>
-              <div className="column is-3">{this.state.isLogged && <AddButton onClick={this.toggleModal} />}</div>
-            </div>
+            <Header />
 
             <div className="columns">
               <div className="column is-3">
@@ -59,7 +53,7 @@ class Home extends Component {
                   )}
                 />
 
-                <LinkData render={({ links }) => <LinkList links={links} />} />
+                <LinkData render={props => <LinkList {...props} />} />
 
                 <div className="columns">
                   <div className="column">
@@ -127,16 +121,21 @@ class Home extends Component {
             </div>
           </div>
         </section>
-        <footer className="footer">
-          <div className="content has-text-centered">
-            <p>
-              <strong>LinkinHunt</strong> by <a href="http://stivencastillo.com">Stiven Castillo</a>. 2018.
-            </p>
-          </div>
-        </footer>
+
+        <Footer />
       </div>
     );
   }
 }
 
-export default Home;
+function mapStateToProps(state) {
+  return {
+    auth: state.firebase.auth,
+    profile: state.firebase.profile,
+  };
+}
+
+export default compose(
+  connect(mapStateToProps),
+  firebaseConnect()
+)(Home);
