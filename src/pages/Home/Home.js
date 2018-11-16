@@ -3,7 +3,7 @@ import './styles.scss';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { firebaseConnect } from 'react-redux-firebase';
+import { firebaseConnect, isEmpty } from 'react-redux-firebase';
 // Own components
 import Header from '../../components/Layout/Header';
 import ModalForm from '../../components/ModalForm/ModalForm';
@@ -27,7 +27,13 @@ class Home extends Component {
     this.setState({ isModalShow: !this.state.isModalShow });
   };
 
+  handleLogout = () => {
+    this.props.firebase.logout();
+    window.location.reload();
+  };
+
   render() {
+    const { auth, profile } = this.props;
     return (
       <div>
         <ModalForm active={this.state.isModalShow} onClose={this.toggleModal} />
@@ -41,6 +47,10 @@ class Home extends Component {
                   <p className="menu-label">CATEGORIES</p>
 
                   <CategoriesData render={({ categories }) => <CategoriesList categories={categories} />} />
+
+                  <button onClick={() => this.props.firebase.updateProfile({ displayName: 'Stiven Papacito' })}>
+                    Update
+                  </button>
                 </aside>
               </div>
 
@@ -68,18 +78,21 @@ class Home extends Component {
               </div>
 
               <div className="column is-3">
-                {this.state.isLogged ? (
+                {!isEmpty(auth) ? (
                   <div className="columns">
                     <div className="column">
                       <div className="card">
                         <div className="card-content has-text-centered">
                           <figure className="image is-128x128" style={{ margin: '0 auto 1em auto' }}>
-                            <img className="is-rounded" src="https://bulma.io/images/placeholders/128x128.png" />
+                            <img
+                              alt="User"
+                              className="is-rounded"
+                              src="https://bulma.io/images/placeholders/128x128.png"
+                            />
                           </figure>
                           <div className="content">
-                            <h5 className="title">Stiven Castillo</h5>
-                            <p className="subtitle">@bacabange</p>
-                            Developer
+                            <h5 className="title">{profile.displayName}</h5>
+                            <p className="subtitle">Developer</p>
                           </div>
                         </div>
 
@@ -87,7 +100,7 @@ class Home extends Component {
                           <a href="#" className="card-footer-item">
                             Profile
                           </a>
-                          <a href="#" className="card-footer-item">
+                          <a href="#" onClick={this.handleLogout} className="card-footer-item">
                             Logout
                           </a>
                         </footer>

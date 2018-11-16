@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './styles.scss';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { firebaseConnect } from 'react-redux-firebase';
@@ -32,7 +32,6 @@ class Login extends Component {
   }
 
   handleLogin = ({ email, password, rememberme }) => {
-    this.props.firebase.logout();
     this.props.firebase
       .login({
         email,
