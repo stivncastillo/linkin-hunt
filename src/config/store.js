@@ -8,12 +8,10 @@ import { firebase as firebaseConfig } from './config';
 import rootReducer from '../redux/reducers';
 
 export default function configureStore(initialState, history) {
-  // Initialize Firebase instance
   firebase.initializeApp(firebaseConfig);
 
   const reduxFirebaseConfig = {
     userProfile: 'users',
-    // useFirestoreForProfile: true,
     enableLogging: false,
   };
 

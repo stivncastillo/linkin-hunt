@@ -1,43 +1,77 @@
 import React, { Component } from 'react';
 import './styles.scss';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { firebaseConnect } from 'react-redux-firebase';
+import LoginForm from '../../components/LoginForm/LoginForm';
+import Alert from '../../components/Alert/Alert';
 
-export default class Login extends Component {
+class Login extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      showError: false,
+      error: '',
+      errors: [],
+    };
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.errors !== prevState.errors) {
+      return { errors: nextProps.errors };
+    } else return null;
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.errors !== this.props.errors) {
+      let errors = prevProps.errors.filter(error => error !== null);
+      this.setState({ errors });
+    }
+  }
+
+  handleLogin = ({ email, password, rememberme }) => {
+    this.props.firebase.logout();
+    this.props.firebase
+      .login({
+        email,
+        password,
+      })
+      .then(response => this.props.history.push('/'))
+      .catch(error => console.log(error));
+  };
+
   render() {
+    const { errors } = this.props;
     return (
-      <section class="hero is-fullheight">
-        <div class="hero-body">
-          <div class="container has-text-centered">
-            <div class="column is-4 is-offset-4">
-              <h3 class="title has-text-grey">Login</h3>
-              <p class="subtitle has-text-grey">Please login to proceed.</p>
-              <div class="box">
-                <figure class="avatar">
-                  <img src="https://placehold.it/128x128" />
+      <section className="hero is-fullheight">
+        <div className="hero-body">
+          <div className="container has-text-centered">
+            <div className="column is-4 is-offset-4">
+              <h3 className="title has-text-grey">Login</h3>
+              <p className="subtitle has-text-grey">Please login to proceed.</p>
+              <div className="box">
+                <figure className="avatar">
+                  <img src="https://placehold.it/128x128" alt="logo" />
                 </figure>
-                <form>
-                  <div class="field">
-                    <div class="control">
-                      <input class="input is-medium" type="email" placeholder="Your Email" autofocus="" />
-                    </div>
-                  </div>
 
-                  <div class="field">
-                    <div class="control">
-                      <input class="input is-medium" type="password" placeholder="Your Password" />
-                    </div>
-                  </div>
-                  <div class="field">
-                    <label class="checkbox">
-                      <input type="checkbox" /> Remember me
-                    </label>
-                  </div>
-                  <button class="button is-block is-info is-medium is-fullwidth">Login</button>
-                </form>
+                {errors.length > 0 &&
+                  errors
+                    .filter(error => error !== null)
+                    .map((error, i) => {
+                      return (
+                        <Alert key={i} type="is-danger">
+                          {error.message}
+                        </Alert>
+                      );
+                    })}
+
+                <LoginForm submitLogin={this.handleLogin} />
               </div>
-              <p class="has-text-grey">
+              <p className="has-text-grey">
                 <Link to="/register">Sign Up</Link> &nbsp;·&nbsp;
-                <a href="../">Forgot Password</a>
+                <Link to="/register">Forgot Password</Link>
               </p>
             </div>
           </div>
@@ -46,3 +80,16 @@ export default class Login extends Component {
     );
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    auth: state.firebase.auth,
+    profile: state.firebase.profile,
+    errors: state.firebase.errors,
+  };
+}
+
+export default compose(
+  firebaseConnect(),
+  connect(mapStateToProps)
+)(Login);
