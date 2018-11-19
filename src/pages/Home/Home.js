@@ -6,7 +6,6 @@ import { compose } from 'redux';
 import { firebaseConnect, isEmpty } from 'react-redux-firebase';
 // Own components
 import Header from '../../components/Layout/Header';
-import ModalForm from '../../components/ModalForm/ModalForm';
 import CategoriesList from '../../components/CategoriesList/CategoriesList';
 import LinkList from '../../components/LinkList/LinkList';
 import LinkData from '../../components/LinkData/LinkData';
@@ -23,10 +22,6 @@ class Home extends Component {
     };
   }
 
-  toggleModal = () => {
-    this.setState({ isModalShow: !this.state.isModalShow });
-  };
-
   handleLogout = () => {
     this.props.firebase.logout();
     window.location.reload();
@@ -36,10 +31,9 @@ class Home extends Component {
     const { auth, profile } = this.props;
     return (
       <div>
-        <ModalForm active={this.state.isModalShow} onClose={this.toggleModal} />
         <section className="section">
           <div className="container is-fluid">
-            <Header />
+            <Header isLogged={!isEmpty(auth)} />
 
             <div className="columns">
               <div className="column is-3">

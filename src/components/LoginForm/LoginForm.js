@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
-export default class LoginForm extends Component {
+class LoginForm extends Component {
   constructor(props) {
     super(props);
 
@@ -56,7 +57,7 @@ export default class LoginForm extends Component {
           </label>
         </div>
         <button
-          className="button is-block is-info is-medium is-fullwidth"
+          className={`button is-block is-info is-medium is-fullwidth ${this.props.isLoading && 'is-loading'}`}
           onClick={() => this.props.submitLogin({ email, password, rememberme })}
         >
           Login
@@ -65,3 +66,14 @@ export default class LoginForm extends Component {
     );
   }
 }
+
+LoginForm.propTypes = {
+  submitLogin: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool,
+};
+
+LoginForm.defaultProps = {
+  isLoading: false,
+};
+
+export default LoginForm;

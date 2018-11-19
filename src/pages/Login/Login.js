@@ -15,6 +15,7 @@ class Login extends Component {
       showError: false,
       error: '',
       errors: [],
+      isLoading: false,
     };
   }
 
@@ -32,17 +33,24 @@ class Login extends Component {
   }
 
   handleLogin = ({ email, password, rememberme }) => {
+    this.setState({ isLoading: true });
+
     this.props.firebase
       .login({
         email,
         password,
       })
       .then(response => this.props.history.push('/'))
-      .catch(error => console.log(error));
+      .catch(error => {
+        this.setState({ isLoading: false });
+        console.log(error);
+      });
   };
 
   render() {
     const { errors } = this.props;
+    const { isLoading } = this.state;
+
     return (
       <section className="hero is-fullheight">
         <div className="hero-body">
@@ -66,7 +74,7 @@ class Login extends Component {
                       );
                     })}
 
-                <LoginForm submitLogin={this.handleLogin} />
+                <LoginForm submitLogin={this.handleLogin} isLoading={isLoading} />
               </div>
               <p className="has-text-grey">
                 <Link to="/register">Sign Up</Link> &nbsp;·&nbsp;
