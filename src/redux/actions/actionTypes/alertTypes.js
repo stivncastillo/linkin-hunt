@@ -1,0 +1,1 @@
+export const SET_ALERT_MESSAGE = 'SET_ALERT_MESSAGE';

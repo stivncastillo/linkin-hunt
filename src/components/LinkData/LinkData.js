@@ -40,6 +40,6 @@ function mapStateToProps(state) {
 }
 
 export default compose(
-  firebaseConnect([{ path: '/links', queryParams: ['limitToLast=15'] }]),
+  firebaseConnect([{ path: '/links', queryParams: ['limitToLast=15', 'orderByChild=link/title'] }]),
   connect(mapStateToProps)
 )(LinkData);

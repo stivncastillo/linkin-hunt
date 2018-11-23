@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
-import { Tag, Input, Tooltip, Icon } from 'antd';
+import { Tag, Input, Tooltip, Icon, message } from 'antd';
+import { firebaseConnect, isEmpty } from 'react-redux-firebase';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import moment from 'moment';
+import { Redirect } from 'react-router-dom';
+
 import CategoriesData from '../CategoriesData/CategoriesData';
 
-export default class ModalForm extends Component {
+class ModalForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -45,12 +51,33 @@ export default class ModalForm extends Component {
     });
   };
 
+  handleSubmit = () => {
+    if (!isEmpty(this.props.auth)) {
+      const link = {
+        title: this.state.title,
+        url: this.state.url,
+        category: this.state.category,
+        tags: this.state.tags,
+        uid: this.props.auth.uid,
+        created_at: moment().format('Y-M-D H:m:s'),
+        deleted_at: null,
+      };
+
+      this.props.firebase.push('links', link).then(() => {
+        this.props.onClose();
+        message.success('You has shared a link! Thank you!');
+      });
+    }
+
+    return <Redirect to="/login" />;
+  };
+
   componentDidMount() {
-    console.log('montado');
+    console.log('abriendo modal', moment().format('Y-M-D H:m:s'));
   }
 
   render() {
-    const { tags, inputTagVisible, inputTagValue } = this.state;
+    const { title, url, tags, inputTagVisible, inputTagValue } = this.state;
 
     return (
       <div className={`modal ${this.props.active && 'is-active'}`}>
@@ -68,7 +95,7 @@ export default class ModalForm extends Component {
                   className="input"
                   type="text"
                   placeholder="Awesome bookmark"
-                  value={this.state.title}
+                  value={title}
                   onChange={e => {
                     this.setState({ title: e.target.value });
                   }}
@@ -83,7 +110,7 @@ export default class ModalForm extends Component {
                   className="input"
                   type="text"
                   placeholder="https://"
-                  value={this.state.url}
+                  value={url}
                   onChange={e => {
                     this.setState({ url: e.target.value.trim() });
                   }}
@@ -105,7 +132,7 @@ export default class ModalForm extends Component {
                         >
                           <option value="">Select One</option>
                           {categories.map(category => (
-                            <option key={category._id} value={category._id} key={category._id}>
+                            <option value={category._id} key={category._id}>
                               {category.name}
                             </option>
                           ))}
@@ -135,7 +162,7 @@ export default class ModalForm extends Component {
                     tagElem
                   );
                 })}
-                {inputTagVisible && (
+                {inputTagVisible ? (
                   <Input
                     ref={this.saveInputRef}
                     type="text"
@@ -146,8 +173,7 @@ export default class ModalForm extends Component {
                     onBlur={this.handleTagInputConfirm}
                     onPressEnter={this.handleTagInputConfirm}
                   />
-                )}
-                {!inputTagVisible && (
+                ) : (
                   <Tag onClick={this.showTagInput} style={{ background: '#fff', borderStyle: 'dashed' }}>
                     <Icon type="plus" /> New Tag
                   </Tag>
@@ -156,7 +182,9 @@ export default class ModalForm extends Component {
             </div>
           </section>
           <footer className="modal-card-foot">
-            <button className="button is-success">Save</button>
+            <button className="button is-success" onClick={this.handleSubmit}>
+              Save
+            </button>
             <button className="button" onClick={this.props.onClose}>
               Cancel
             </button>
@@ -166,3 +194,14 @@ export default class ModalForm extends Component {
     );
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    auth: state.firebase.auth,
+  };
+}
+
+export default compose(
+  connect(mapStateToProps),
+  firebaseConnect()
+)(ModalForm);

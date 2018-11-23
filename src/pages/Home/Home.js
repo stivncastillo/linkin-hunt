@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { firebaseConnect, isEmpty } from 'react-redux-firebase';
+
 // Own components
 import Header from '../../components/Layout/Header';
 import CategoriesList from '../../components/CategoriesList/CategoriesList';

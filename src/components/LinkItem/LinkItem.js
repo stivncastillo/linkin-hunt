@@ -6,7 +6,7 @@ export default class LinkItem extends Component {
       <div className="card" style={{ marginBottom: '1em' }}>
         <div className="card-content">
           <p className="title">{this.props.title}</p>
-          <p>{this.props.description}</p>
+          {this.props.description && <p>{this.props.description}</p>}
           <br />
           <div className="tags">
             <span className="tag is-primary">{this.props.category}</span>
@@ -23,7 +23,7 @@ export default class LinkItem extends Component {
           <a href="#" className="card-footer-item">
             <i className="fa fa-heart" />
           </a>
-          <a href={this.props.link} className="card-footer-item" target="_blank">
+          <a href={this.props.url} className="card-footer-item" target="_blank">
             <i className="fa fa-external-link-alt" />
           </a>
         </footer>
