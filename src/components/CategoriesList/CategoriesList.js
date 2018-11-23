@@ -5,7 +5,7 @@ const CategoriesList = ({ categories }) => {
   return (
     <ul className="menu-list">
       {categories.map(category => (
-        <CategoryItem key={category.id} {...category} />
+        <CategoryItem key={category._id} {...category} />
       ))}
     </ul>
   );

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import data from '../../data/links.json';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { firebaseConnect } from 'react-redux-firebase';
