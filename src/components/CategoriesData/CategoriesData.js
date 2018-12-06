@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { firebaseConnect } from 'react-redux-firebase';
+import data from '../../data/links.json';
 
 // Render Prop pattern
 class CategoriesData extends Component {
@@ -9,7 +9,7 @@ class CategoriesData extends Component {
     categories: [],
   };
 
-  static getDerivedStateFromProps(nextProps, prevState) {
+  /* static getDerivedStateFromProps(nextProps, prevState) {
     if (nextProps.categories !== prevState.categories) {
       return { categories: nextProps.categories };
     } else return null;
@@ -20,12 +20,12 @@ class CategoriesData extends Component {
       let categories = prevProps.categories;
       this.setState({ categories });
     }
-  }
+  } */
 
   componentDidMount() {
-    // this.setState({
-    //   categories: data.categories,
-    // });
+    this.setState({
+      categories: data.categories,
+    });
   }
 
   render() {
@@ -35,7 +35,9 @@ class CategoriesData extends Component {
   }
 }
 
-function mapStateToProps(state) {
+export default CategoriesData;
+
+/* function mapStateToProps(state) {
   return {
     categories: state.firebase.data.categories
       ? Object.keys(state.firebase.data.categories).map(i => state.firebase.data.categories[i])
@@ -46,4 +48,4 @@ function mapStateToProps(state) {
 export default compose(
   firebaseConnect([{ path: '/categories' }]),
   connect(mapStateToProps)
-)(CategoriesData);
+)(CategoriesData); */

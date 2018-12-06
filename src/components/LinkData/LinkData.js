@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { firebaseConnect, isLoaded, isEmpty } from 'react-redux-firebase';
+import data from '../../data/links.json';
 
 // Render Prop pattern
 class LinkData extends React.Component {
@@ -9,7 +9,7 @@ class LinkData extends React.Component {
     links: [],
   };
 
-  static getDerivedStateFromProps(nextProps, prevState) {
+  /* static getDerivedStateFromProps(nextProps, prevState) {
     if (nextProps.links !== prevState.links) {
       return { links: nextProps.links };
     } else return null;
@@ -20,18 +20,24 @@ class LinkData extends React.Component {
       let links = prevProps.links;
       this.setState({ links });
     }
+  } */
+
+  componentDidMount() {
+    this.setState({
+      links: data.links,
+    });
   }
 
   render() {
     return this.props.render({
       links: this.state.links,
-      isLoaded,
-      isEmpty,
     });
   }
 }
 
-function mapStateToProps(state) {
+export default LinkData;
+
+/* function mapStateToProps(state) {
   return {
     links: state.firebase.data.links
       ? Object.keys(state.firebase.data.links).map(i => state.firebase.data.links[i])
@@ -40,6 +46,6 @@ function mapStateToProps(state) {
 }
 
 export default compose(
-  firebaseConnect([{ path: '/links', queryParams: ['limitToLast=15', 'orderByChild=link/title'] }]),
+  firebaseConnect([{ path: '/links', queryParams: ['limitToLast=15'] }]),
   connect(mapStateToProps)
-)(LinkData);
+)(LinkData); */

@@ -3,53 +3,30 @@
             "id": 1,
             "title": "Auth · React Redux Firebase",
             "description": "quam minima eum laudantium amet. Magni, provident!",
-            "link": "http://react-redux-firebase.com/docs/recipes/auth.html",
-            "category": {
-                "id": 1,
-                "name": "Frontend"
-            },
-            "tags": [{
-                    "name": "react"
-                },
-                {
-                    "name": "hoc"
-                },
-                {
-                    "name": "patterns"
-                }
-            ]
+            "url": "http://react-redux-firebase.com/docs/recipes/auth.html",
+            "category": "Frontend",
+            "tags": ["angular", "google", "patterns"]
+
         },
         {
             "id": 2,
             "title": "Using Sass in Create React App v2",
             "description": "Adding Sass to a React app is simple thanks to Create React App v2. Add Sass in a minute!",
-            "link": "https://scotch.io/tutorials/using-sass-in-create-react-app-v2",
-            "category": {
-                "id": 1,
-                "name": "Devops"
-            },
-            "tags": [{
-                    "name": "angular"
-                },
-                {
-                    "name": "google"
-                },
-                {
-                    "name": "patterns"
-                }
-            ]
+            "url": "https://scotch.io/tutorials/using-sass-in-create-react-app-v2",
+            "category": "Frontend",
+            "tags": ["angular", "google", "patterns"]
         }
     ],
     "categories": [{
-            "id": 1,
+            "_id": 1,
             "name": "Frontend"
         },
         {
-            "id": 2,
+            "_id": 2,
             "name": "Backend"
         },
         {
-            "id": 3,
+            "_id": 3,
             "name": "Devops"
         }
     ]

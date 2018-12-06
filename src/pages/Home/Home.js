@@ -3,7 +3,6 @@ import './styles.scss';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { firebaseConnect, isEmpty } from 'react-redux-firebase';
 
 // Own components
 import Header from '../../components/Layout/Header';
@@ -24,17 +23,15 @@ class Home extends Component {
   }
 
   handleLogout = () => {
-    this.props.firebase.logout();
     window.location.reload();
   };
 
   render() {
-    const { auth, profile } = this.props;
     return (
       <div>
         <section className="section">
           <div className="container is-fluid">
-            <Header isLogged={!isEmpty(auth)} />
+            <Header isLogged={false} />
 
             <div className="columns">
               <div className="column is-3">
@@ -42,10 +39,6 @@ class Home extends Component {
                   <p className="menu-label">CATEGORIES</p>
 
                   <CategoriesData render={({ categories }) => <CategoriesList categories={categories} />} />
-
-                  <button onClick={() => this.props.firebase.updateProfile({ displayName: 'Stiven Papacito' })}>
-                    Update
-                  </button>
                 </aside>
               </div>
 
@@ -73,7 +66,7 @@ class Home extends Component {
               </div>
 
               <div className="column is-3">
-                {!isEmpty(auth) ? (
+                {false ? (
                   <div className="columns">
                     <div className="column">
                       <div className="card">
@@ -86,7 +79,7 @@ class Home extends Component {
                             />
                           </figure>
                           <div className="content">
-                            <h5 className="title">{profile.displayName}</h5>
+                            <h5 className="title">Stiven</h5>
                             <p className="subtitle">Developer</p>
                           </div>
                         </div>
@@ -136,7 +129,9 @@ class Home extends Component {
   }
 }
 
-function mapStateToProps(state) {
+export default Home;
+
+/* function mapStateToProps(state) {
   return {
     auth: state.firebase.auth,
     profile: state.firebase.profile,
@@ -146,4 +141,4 @@ function mapStateToProps(state) {
 export default compose(
   connect(mapStateToProps),
   firebaseConnect()
-)(Home);
+)(Home);*/

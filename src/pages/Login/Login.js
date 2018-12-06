@@ -3,9 +3,8 @@ import './styles.scss';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { firebaseConnect } from 'react-redux-firebase';
 import LoginForm from '../../components/LoginForm/LoginForm';
-import Alert from '../../components/Alert/Alert';
+import AlertBanner from '../../components/AlertBanner/AlertBanner';
 
 class Login extends Component {
   constructor(props) {
@@ -34,17 +33,6 @@ class Login extends Component {
 
   handleLogin = ({ email, password, rememberme }) => {
     this.setState({ isLoading: true });
-
-    this.props.firebase
-      .login({
-        email,
-        password,
-      })
-      .then(response => this.props.history.push('/'))
-      .catch(error => {
-        this.setState({ isLoading: false });
-        console.log(error);
-      });
   };
 
   render() {
@@ -68,9 +56,9 @@ class Login extends Component {
                     .filter(error => error !== null)
                     .map((error, i) => {
                       return (
-                        <Alert key={i} type="is-danger">
+                        <AlertBanner key={i} type="is-danger">
                           {error.message}
-                        </Alert>
+                        </AlertBanner>
                       );
                     })}
 
@@ -88,7 +76,9 @@ class Login extends Component {
   }
 }
 
-function mapStateToProps(state) {
+export default Login;
+
+/* function mapStateToProps(state) {
   return {
     auth: state.firebase.auth,
     profile: state.firebase.profile,
@@ -99,4 +89,4 @@ function mapStateToProps(state) {
 export default compose(
   firebaseConnect(),
   connect(mapStateToProps)
-)(Login);
+)(Login); */
