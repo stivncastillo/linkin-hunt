@@ -7,13 +7,16 @@ import { Provider } from 'react-redux';
 
 import configureStore from './config/store';
 import App from './App';
+import Firebase, { FirebaseContext } from './components/Firebase';
 
 const initialState = {};
 const store = configureStore(initialState);
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <FirebaseContext.Provider value={new Firebase()}>
+      <App />
+    </FirebaseContext.Provider>
   </Provider>,
   document.getElementById('root')
 );

@@ -18,7 +18,7 @@ class Login extends Component {
     };
   }
 
-  static getDerivedStateFromProps(nextProps, prevState) {
+  /* static getDerivedStateFromProps(nextProps, prevState) {
     if (nextProps.errors !== prevState.errors) {
       return { errors: nextProps.errors };
     } else return null;
@@ -29,15 +29,14 @@ class Login extends Component {
       let errors = prevProps.errors.filter(error => error !== null);
       this.setState({ errors });
     }
-  }
+  } */
 
   handleLogin = ({ email, password, rememberme }) => {
     this.setState({ isLoading: true });
   };
 
   render() {
-    const { errors } = this.props;
-    const { isLoading } = this.state;
+    const { isLoading, errors } = this.state;
 
     return (
       <section className="hero is-fullheight">
@@ -57,7 +56,7 @@ class Login extends Component {
                     .map((error, i) => {
                       return (
                         <AlertBanner key={i} type="is-danger">
-                          {error.message}
+                          Error
                         </AlertBanner>
                       );
                     })}

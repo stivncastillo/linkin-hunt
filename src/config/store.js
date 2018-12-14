@@ -1,14 +1,8 @@
 import { createStore, compose, applyMiddleware } from 'redux';
 import logger from 'redux-logger';
-import firebase from 'firebase';
-import 'firebase/database';
-import 'firebase/auth';
-import { firebase as firebaseConfig } from './config';
 import rootReducer from '../redux/reducers';
 
 export default function configureStore(initialState, history) {
-  firebase.initializeApp(firebaseConfig);
-
   const createStoreWithMiddleware = compose(
     applyMiddleware(logger),
     typeof window === 'object' && typeof window.devToolsExtension !== 'undefined' ? window.devToolsExtension() : f => f

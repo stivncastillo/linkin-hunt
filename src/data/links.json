@@ -1,7 +1,7 @@
 {
     "links": [{
             "id": 1,
-            "title": "Auth · React Redux Firebase",
+            "title": "Auth React Redux Firebase",
             "description": "quam minima eum laudantium amet. Magni, provident!",
             "url": "http://react-redux-firebase.com/docs/recipes/auth.html",
             "category": "Frontend",
