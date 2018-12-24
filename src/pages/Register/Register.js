@@ -1,60 +1,25 @@
 import React, { Component } from 'react';
 import './styles.scss';
 import { Link } from 'react-router-dom';
+import { withFirebase } from '../../components/Firebase';
+import RegisterForm from './RegisterForm';
 
-export default class Register extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  handleSingUp = () => {}
-
+class Register extends Component {
   render() {
     return (
-      <section class="hero is-fullheight">
-        <div class="hero-body">
-          <div class="container has-text-centered">
-            <div class="column is-4 is-offset-4">
-              <h3 class="title has-text-grey">Register</h3>
-              <p class="subtitle has-text-grey">Please login to proceed.</p>
-              <div class="box">
-                <figure class="avatar">
+      <section className="hero is-fullheight">
+        <div className="hero-body">
+          <div className="container has-text-centered">
+            <div className="column is-4 is-offset-4">
+              <h3 className="title has-text-grey">Register</h3>
+              <p className="subtitle has-text-grey">Please login to proceed.</p>
+              <div className="box">
+                <figure className="avatar">
                   <img src="https://placehold.it/128x128" alt="logo" />
                 </figure>
-                <form>
-                  <div class="field">
-                    <div class="control">
-                      <input class="input is-medium" type="name" placeholder="Your Name" autofocus="" />
-                    </div>
-                  </div>
-
-                  <div class="field">
-                    <div class="control">
-                      <input class="input is-medium" type="email" placeholder="Your Email" autofocus="" />
-                    </div>
-                  </div>
-
-                  <div class="field">
-                    <div class="control">
-                      <input class="input is-medium" type="password" placeholder="Your Password" />
-                    </div>
-                  </div>
-
-                  <div class="field">
-                    <div class="control">
-                      <input class="input is-medium" type="password_confirmation" placeholder="Confirm Password" />
-                    </div>
-                  </div>
-
-                  <div class="field">
-                    <label class="checkbox">
-                      <input type="checkbox" /> Accept Terms and Conditions
-                    </label>
-                  </div>
-                  <button class="button is-block is-info is-medium is-fullwidth">Register</button>
-                </form>
+                <RegisterForm />
               </div>
-              <p class="has-text-grey">
+              <p className="has-text-grey">
                 <Link to="/login">Sign In</Link>
               </p>
             </div>
@@ -64,3 +29,5 @@ export default class Register extends Component {
     );
   }
 }
+
+export default withFirebase(Register);
