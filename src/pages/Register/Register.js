@@ -3,6 +3,12 @@ import './styles.scss';
 import { Link } from 'react-router-dom';
 
 export default class Register extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  handleSingUp = () => {}
+
   render() {
     return (
       <section class="hero is-fullheight">
