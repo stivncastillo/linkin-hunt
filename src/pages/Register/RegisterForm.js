@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import SimpleReactValidator from 'simple-react-validator';
 import { withFirebase } from '../../components/Firebase';
+import { withRouter } from 'react-router-dom';
+import { compose } from 'recompose';
 
 const INITIAL_STATE = {
   name: '',
@@ -33,6 +35,8 @@ class RegisterForm extends Component {
         .doCreateUserWithEmailAndPassword(email, password)
         .then(authUser => {
           this.setState({ ...INITIAL_STATE });
+          // withRouter
+          this.props.history.push('/');
         })
         .catch(error => {
           this.setState({ error });
@@ -117,4 +121,7 @@ class RegisterForm extends Component {
   }
 }
 
-export default withFirebase(RegisterForm);
+export default compose(
+  withRouter,
+  withFirebase
+)(RegisterForm);
