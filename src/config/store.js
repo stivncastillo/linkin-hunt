@@ -3,10 +3,7 @@ import logger from 'redux-logger';
 import rootReducer from '../redux/reducers';
 
 export default function configureStore(initialState, history) {
-  const createStoreWithMiddleware = compose(
-    applyMiddleware(logger),
-    typeof window === 'object' && typeof window.devToolsExtension !== 'undefined' ? window.devToolsExtension() : f => f
-  )(createStore);
+  const createStoreWithMiddleware = compose(applyMiddleware(logger))(createStore);
   const store = createStoreWithMiddleware(rootReducer);
 
   if (module.hot) {

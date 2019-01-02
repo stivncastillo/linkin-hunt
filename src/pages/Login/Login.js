@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import './styles.scss';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
 import LoginForm from '../../components/LoginForm/LoginForm';
 import AlertBanner from '../../components/AlertBanner/AlertBanner';
+import { withFirebase } from '../../components/Firebase';
+import { withRouter } from 'react-router-dom';
+import { compose } from 'recompose';
 
 class Login extends Component {
   constructor(props) {
@@ -31,12 +32,23 @@ class Login extends Component {
     }
   } */
 
-  handleLogin = ({ email, password, rememberme }) => {
+  handleSignIn = ({ email, password }) => {
     this.setState({ isLoading: true });
+
+    this.props.firebase
+      .doSignInWithEmailAndPassword(email, password)
+      .then(authUser => {
+        console.log('user', authUser);
+        // withRouter
+        this.props.history.push('/');
+      })
+      .catch(error => {
+        this.setState({ error });
+      });
   };
 
   render() {
-    const { isLoading, errors } = this.state;
+    const { isLoading, error } = this.state;
 
     return (
       <section className="hero is-fullheight">
@@ -50,7 +62,9 @@ class Login extends Component {
                   <img src="https://placehold.it/128x128" alt="logo" />
                 </figure>
 
-                {errors.length > 0 &&
+                {error && <AlertBanner type="is-danger">{error.message}</AlertBanner>}
+
+                {/* errors.length > 0 &&
                   errors
                     .filter(error => error !== null)
                     .map((error, i) => {
@@ -59,9 +73,12 @@ class Login extends Component {
                           Error
                         </AlertBanner>
                       );
-                    })}
+                    }) */}
 
-                <LoginForm submitLogin={this.handleLogin} isLoading={isLoading} />
+                <LoginForm
+                  handleSignIn={({ email, password }) => this.handleSignIn({ email, password })}
+                  isLoading={isLoading}
+                />
               </div>
               <p className="has-text-grey">
                 <Link to="/register">Sign Up</Link> &nbsp;·&nbsp;
@@ -75,17 +92,7 @@ class Login extends Component {
   }
 }
 
-export default Login;
-
-/* function mapStateToProps(state) {
-  return {
-    auth: state.firebase.auth,
-    profile: state.firebase.profile,
-    errors: state.firebase.errors,
-  };
-}
-
 export default compose(
-  firebaseConnect(),
-  connect(mapStateToProps)
-)(Login); */
+  withRouter,
+  withFirebase
+)(Login);

@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import './styles.scss';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
 
 // Own components
 import Header from '../../components/Layout/Header';

@@ -1,16 +1,39 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import SimpleReactValidator from 'simple-react-validator';
+
+const INITIAL_STATE = {
+  email: 'stivenca@stiven.com',
+  password: '123456',
+  rememberme: false,
+  error: null,
+};
 
 class LoginForm extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      email: 'stivenca@stiven.com',
-      password: '123456',
-      rememberme: false,
+      ...INITIAL_STATE,
     };
+
+    this.validator = new SimpleReactValidator();
   }
+
+  onChange = event => {
+    this.setState({ [event.target.name]: event.target.value });
+  };
+
+  handleSignIn = () => {
+    const { email, password, rememberme } = this.state;
+    if (this.validator.allValid()) {
+      this.setState({ ...INITIAL_STATE });
+      this.props.handleSignIn({ email, password, rememberme });
+    } else {
+      // rerender to show messages for the first time
+      this.forceUpdate();
+    }
+  };
 
   render() {
     const { email, password, rememberme } = this.state;
@@ -22,13 +45,12 @@ class LoginForm extends Component {
             <input
               className="input is-medium"
               type="email"
+              name="email"
               value={email}
-              onChange={e => {
-                this.setState({ email: e.target.value.trim() });
-              }}
+              onChange={this.onChange}
               placeholder="Your Email"
-              autoFocus=""
             />
+            {this.validator.message('email', email, 'required|email')}
           </div>
         </div>
 
@@ -37,12 +59,12 @@ class LoginForm extends Component {
             <input
               className="input is-medium"
               type="password"
+              name="password"
               value={password}
-              onChange={e => {
-                this.setState({ password: e.target.value });
-              }}
+              onChange={this.onChange}
               placeholder="Your Password"
             />
+            {this.validator.message('password', password, 'required|min:6')}
           </div>
         </div>
         <div className="field">
@@ -58,7 +80,7 @@ class LoginForm extends Component {
         </div>
         <button
           className={`button is-block is-info is-medium is-fullwidth ${this.props.isLoading && 'is-loading'}`}
-          onClick={() => this.props.submitLogin({ email, password, rememberme })}
+          onClick={this.handleSignIn}
         >
           Login
         </button>
@@ -68,7 +90,7 @@ class LoginForm extends Component {
 }
 
 LoginForm.propTypes = {
-  submitLogin: PropTypes.func.isRequired,
+  handleSignIn: PropTypes.func.isRequired,
   isLoading: PropTypes.bool,
 };
 

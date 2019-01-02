@@ -20,7 +20,7 @@ export default class LinkItem extends Component {
           </div>
         </div>
         <footer className="card-footer">
-          <a href="#" className="card-footer-item">
+          <a href="/" className="card-footer-item">
             <i className="fa fa-heart" />
           </a>
           <a href={this.props.url} className="card-footer-item" target="_blank">
