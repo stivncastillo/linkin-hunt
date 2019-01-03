@@ -5,8 +5,17 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Home from './pages/Home/Home';
 import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
+import { withAuthentication } from './components/Session';
 
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      authUser: null,
+    };
+  }
+
   render() {
     return (
       <BrowserRouter>
@@ -23,4 +32,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default withAuthentication(App);
