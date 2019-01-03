@@ -12,6 +12,7 @@ import Footer from '../../components/Layout/Footer';
 import { AuthUserContext } from '../../components/Session';
 
 import { FirebaseContext } from '../../components/Firebase';
+import SignoutButton from '../../components/SignoutButton/SignoutButton';
 
 class Home extends Component {
   constructor(props) {
@@ -94,9 +95,7 @@ class Home extends Component {
                                     <a href="#" className="card-footer-item">
                                       Profile
                                     </a>
-                                    <a href="#" onClick={this.handleLogout} className="card-footer-item">
-                                      Logout
-                                    </a>
+                                    <SignoutButton />
                                   </footer>
                                 </div>
                               </div>
