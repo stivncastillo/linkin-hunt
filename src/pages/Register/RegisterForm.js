@@ -34,6 +34,7 @@ class RegisterForm extends Component {
       this.props.firebase
         .doCreateUserWithEmailAndPassword(email, password)
         .then(authUser => {
+          authUser.user.updateProfile({ displayName: name });
           this.setState({ ...INITIAL_STATE });
           // withRouter
           this.props.history.push('/');
@@ -63,7 +64,7 @@ class RegisterForm extends Component {
               onChange={this.onChange}
               autoFocus
             />
-            {this.validator.message('name', name, 'required|alpha')}
+            {this.validator.message('name', name, 'required')}
           </div>
         </div>
 

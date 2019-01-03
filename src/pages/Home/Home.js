@@ -86,8 +86,10 @@ class Home extends Component {
                                       />
                                     </figure>
                                     <div className="content">
-                                      <h5 className="title">{authUser.email}</h5>
-                                      <p className="subtitle">Developer</p>
+                                      <h5 className="title">{authUser.displayName}</h5>
+                                      <p className="subtitle">
+                                        <i>no bio</i>
+                                      </p>
                                     </div>
                                   </div>
 
